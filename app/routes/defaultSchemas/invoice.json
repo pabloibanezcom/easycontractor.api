@@ -1,0 +1,8 @@
+{
+  "issuedDate": "",
+  "paymentDate": "",
+  "client": "Test client",
+  "amountNet": 10000,
+  "amountVAT": 2000,
+  "amountGross": 12000
+}

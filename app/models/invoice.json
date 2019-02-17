@@ -1,0 +1,25 @@
+{
+  "name": "Invoice",
+  "route": "invoice",
+  "authLevel": "none",
+  "properties": {
+    "issuedDate": {
+      "type": "Date"
+    },
+    "paymentDate": {
+      "type": "Date"
+    },
+    "client": {
+      "type": "String"
+    },
+    "amountNet": {
+      "type": "Number"
+    },
+    "amountVAT": {
+      "type": "Number"
+    },
+    "amountGross": {
+      "type": "Number"
+    }
+  }
+}
