@@ -1,0 +1,46 @@
+{
+  "name": "Person",
+  "route": "person",
+  "authLevel": "none",
+  "properties": {
+    "email": {
+      "type": "String"
+    },
+    "firstName": {
+      "type": "String"
+    },
+    "lastName": {
+      "type": "String"
+    },
+    "countryResidence": {
+      "type": "String"
+    },
+    "address": {
+      "type": "String"
+    },
+    "dateOfBirth": {
+      "type": "Date"
+    },
+    "nationality": {
+      "type": "String"
+    },
+    "phone": {
+      "type": "String"
+    },
+    "backgroundPicture": {
+      "type": "String"
+    },
+    "companiesAsDirector": {
+      "type": "[Company]",
+      "propertyMatch": "directors"
+    },
+    "companiesAsShareholder": {
+      "type": "[Company]",
+      "propertyMatch": "shareholders"
+    },
+    "companiesAsAccountant": {
+      "type": "[Company]",
+      "propertyMatch": "accountants"
+    }
+  }
+}

@@ -2,12 +2,5 @@
   "name": "User",
   "route": "user",
   "authLevel": "none",
-  "properties": {
-    "sub": {
-      "type": "String"
-    },
-    "role": {
-      "type": "String"
-    }
-  }
+  "properties": {}
 }

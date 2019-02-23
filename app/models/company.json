@@ -1,0 +1,38 @@
+{
+  "name": "Company",
+  "route": "company",
+  "authLevel": "none",
+  "properties": {
+    "name": {
+      "type": "String"
+    },
+    "url": {
+      "type": "String"
+    },
+    "companyNumber": {
+      "type": "String"
+    },
+    "registeredAdress": {
+      "type": "Mixed"
+    },
+    "incorporationDate": {
+      "type": "Date"
+    },
+    "directors": {
+      "type": "[Person]",
+      "propertyMatch": "companiesAsDirector"
+    },
+    "shareholders": {
+      "type": "[Person]",
+      "propertyMatch": "companiesAsShareholder"
+    },
+    "accountants": {
+      "type": "[Person]",
+      "propertyMatch": "companiesAsAccountant"
+    },
+    "clients": {
+      "type": "[Client]",
+      "propertyMatch": "company"
+    }
+  }
+}

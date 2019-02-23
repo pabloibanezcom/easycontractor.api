@@ -1,0 +1,32 @@
+{
+  "name": "Client",
+  "route": "client",
+  "authLevel": "none",
+  "properties": {
+    "key": {
+      "type": "String"
+    },
+    "name": {
+      "type": "String"
+    },
+    "sector": {
+      "type": "String"
+    },
+    "web": {
+      "type": "String"
+    },
+    "address": {
+      "type": "String"
+    },
+    "logo": {
+      "type": "String"
+    },
+    "people": {
+      "type": "[Person]"
+    },
+    "company": {
+      "type": "Company",
+      "propertyMatch": "clients"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Settings",
+  "route": "settings",
+  "authLevel": "none",
+  "properties": {
+    "settings": {
+      "type": "Mixed"
+    }
+  }
+}

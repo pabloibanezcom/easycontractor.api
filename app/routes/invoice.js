@@ -25,7 +25,6 @@ module.exports = (app, modelsService) => {
     app.routesInfo['Invoice'].push({ model: 'Invoice', name: 'Add invoice', method: 'POST', url: url, body: defaultSchemas.invoice });
   }
 
-  app.routesInfo = {};
   app.routesInfo['Invoice'] = [];
   registerSearchInvoices();
   registerAddInvoice();
