@@ -34,7 +34,7 @@ service.addPersonToCompany = async (modelsService, companyId, requestBody) => {
     const company = await Company.findById(companyId);
     const person = await Person.findById(requestBody.personId);
     if (!person) {
-      return { statusCode: 400, data: 'There is no person for that id' };
+      return { statusCode: 404, data: 'There is no person for that id' };
     }
     const propsToUpdate = getCompanyAndPersonPropsFromRole(requestBody.role);
     if (!propsToUpdate) {

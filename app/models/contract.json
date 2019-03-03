@@ -1,0 +1,26 @@
+{
+  "name": "Contract",
+  "route": "contract",
+  "authLevel": "none",
+  "properties": {
+    "startDate": {
+      "type": "Date"
+    },
+    "endDate": {
+      "type": "Date"
+    },
+    "rate": {
+      "type": "Number"
+    },
+    "currency": {
+      "type": "String"
+    },
+    "insideIR35": {
+      "type": "Boolean"
+    },
+    "client": {
+      "type": "Client",
+      "propertyMatch": "contracts"
+    }
+  }
+}

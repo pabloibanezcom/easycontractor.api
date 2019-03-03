@@ -55,4 +55,31 @@ service.addPersonToClient = async (modelsService, clientId, requestBody) => {
   }
 }
 
+service.addWorkingDaysToClient = async (modelsService, clientId, requestBody) => {
+  try {
+    const client = await modelsService.getModel('Client').findById(clientId);
+    if (!client) {
+      return { statusCode: 400, data: 'There is no client for that id' };
+    }
+    if (!client.workingDays) {
+      client.workingDays = [];
+    }
+    requestBody.days.forEach(day => {
+      const date = new Date(day.date);
+      const workingDay = client.workingDays.find(wd => wd.date - date === 0);
+      if (workingDay) {
+        workingDay.time = day.time;
+      } else {
+        client.workingDays.push({ date: date, time: day.time });
+      }
+    });
+    client.markModified('workingDays');
+    await client.save();
+    return { statusCode: 200, data: `Working days has been added to ${client.name}` };
+  }
+  catch (err) {
+    return { statusCode: 500, data: err };
+  }
+}
+
 module.exports = service;

@@ -9,9 +9,6 @@
     "paymentDate": {
       "type": "Date"
     },
-    "client": {
-      "type": "String"
-    },
     "amountNet": {
       "type": "Number"
     },
@@ -20,6 +17,10 @@
     },
     "amountGross": {
       "type": "Number"
+    },
+    "client": {
+      "type": "Client",
+      "propertyMatch": "invoices"
     }
   }
 }

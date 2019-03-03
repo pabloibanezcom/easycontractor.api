@@ -36,9 +36,21 @@ module.exports = (app, modelsService) => {
     app.routesInfo['Client'].push({ model: 'Client', name: 'Add person to client', method: 'PUT', url: url, body: defaultSchemas.addPersonToClient });
   }
 
+  const registerAddWorkingDaysToClient = () => {
+    const url = '/api/client/:clientId/days';
+    app.put(url,
+      (req, res) => {
+        service.addWorkingDaysToClient(modelsService, req.params.clientId, req.body)
+          .then(result => res.status(result.statusCode).send(result.data))
+          .catch(err => res.status(500).send(err));
+      });
+    app.routesInfo['Client'].push({ model: 'Client', name: 'Add working days to client', method: 'PUT', url: url, body: defaultSchemas.addWorkingDaysToClient });
+  }
+
   app.routesInfo = {};
   app.routesInfo['Client'] = [];
   registerSearchClients();
   registerAddClient();
   registerAddPersonToClient();
+  registerAddWorkingDaysToClient();
 };

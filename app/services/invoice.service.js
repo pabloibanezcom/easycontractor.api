@@ -18,18 +18,59 @@ service.searchInvoices = async (modelsService, searchBody) => {
 }
 
 service.addInvoice = async (modelsService, invoiceBody) => {
-  const Invoice = await modelsService.getModel('Invoice');
-  const objSchema = {
-    issuedDate: invoiceBody.issuedDate,
-    paymentDate: invoiceBody.paymentDate,
-    client: invoiceBody.client,
-    amountNet: invoiceBody.amountNet,
-    amountVAT: invoiceBody.amountVAT,
-    amountGross: invoiceBody.amountGross,
+  try {
+    const Invoice = modelsService.getModel('Invoice');
+    const Client = modelsService.getModel('Client');
+    // Check if client exists
+    const client = await Client.findById(invoiceBody.client);
+    if (!client) {
+      return { statusCode: 404, data: 'There is no client for that id' };
+    }
+    const objSchema = {
+      issuedDate: invoiceBody.issuedDate,
+      paymentDate: invoiceBody.paymentDate,
+      client: client.id,
+      amountNet: invoiceBody.amountNet,
+      amountVAT: invoiceBody.amountVAT,
+      amountGross: invoiceBody.amountGross,
+    }
+    const invoice = new Invoice(objSchema);
+    const doc = await invoice.save();
+    // Add invoice to client document
+    client.invoices.push(doc._id);
+    await client.save();
+    return { statusCode: 201, data: doc };
   }
-  const invoice = new Invoice(objSchema);
-  const doc = await invoice.save();
-  return { statusCode: 200, data: doc };
+  catch (err) {
+    return { statusCode: 500, data: err };
+  }
+}
+
+service.updateInvoice = async (modelsService, invoiceId, invoiceBody) => {
+  try {
+    const invoice = await modelsService.getModel('Invoice').findByIdAndUpdate(invoiceId, invoiceBody);
+    return { statusCode: 200, data: invoice };
+  }
+  catch (err) {
+    return { statusCode: 500, data: err };
+  }
+}
+
+service.deleteInvoice = async (modelsService, invoiceId) => {
+  try {
+    const Invoice = modelsService.getModel('Invoice');
+    const Client = modelsService.getModel('Client');
+    const invoice = await Invoice.findById(invoiceId).populate({ path: 'client', select: 'name' });
+    if (!invoice) {
+      return { statusCode: 404, data: 'There is no invoice for that id' };
+    }
+    await invoice.remove();
+    await Client.update({ _id: invoice.client.id }, { $pullAll: { invoices: [invoiceId] } });
+    return { statusCode: 200, data: invoiceId };
+  }
+  catch (err) {
+    return { statusCode: 500, data: err };
+  }
 }
 
 module.exports = service;

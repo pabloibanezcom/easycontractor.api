@@ -27,6 +27,17 @@
     "company": {
       "type": "Company",
       "propertyMatch": "clients"
+    },
+    "contracts": {
+      "type": "[Contract]",
+      "propertyMatch": "client"
+    },
+    "invoices": {
+      "type": "[Invoice]",
+      "propertyMatch": "client"
+    },
+    "workingDays": {
+      "type": "Mixed"
     }
   }
 }
